@@ -1,0 +1,43 @@
+{
+  "name": "@yourorg/cursor-project-standards",
+  "version": "1.0.0",
+  "description": "Organizational development standards and AI assistance rules for Product Management workflows in structured finance",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "apply": "node cli/apply-standards.js",
+    "validate": "node cli/validate-project.js",
+    "setup": "node cli/setup-project.js"
+  },
+  "keywords": [
+    "cursor-rules",
+    "product-management",
+    "structured-finance",
+    "ai-assistance",
+    "development-standards",
+    "project-templates"
+  ],
+  "author": "Product Management Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aeyarr/cursorrules.git"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "commander": "^11.0.0",
+    "fs-extra": "^11.1.0"
+  },
+  "bin": {
+    "cursor-project-cli": "cli/index.js"
+  },
+  "files": [
+    ".cursor/",
+    "cli/",
+    "docs/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
