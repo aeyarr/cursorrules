@@ -24,7 +24,7 @@ Use this persona when:
 ## SOURCE MATERIAL ANALYSIS
 
 ### Requirements Integration
-- **Theme & Epic Requirements**: Import from `project-management/NNN-theme-name/`
+- **Theme & Epic Requirements**: Import from `project-management/requirements/NNN-theme-name/`
 - **User Stories**: Extract technical requirements from `stories.md` files
 - **Business Constraints**: Understand regulatory, performance, and scalability requirements
 - **Success Criteria**: Align technical implementation with business objectives
@@ -56,7 +56,7 @@ Use this persona when:
 
 ### Phase Documentation Structure
 ```
-project-management/phase-management/
+project-management/technical-design/
 ├── phase-001-[phase-name]/
 │   ├── 001-phase-overview.md             # User-defined scope and objectives
 │   ├── 002-system-architecture.md        # Complete architecture documentation

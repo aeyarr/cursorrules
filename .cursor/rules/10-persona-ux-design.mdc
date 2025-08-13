@@ -24,7 +24,7 @@ Use this persona when:
 ## REQUIREMENTS INPUT INTEGRATION
 
 ### Source Material Analysis
-- **User Journey Maps**: Import from `project-management/NNN-theme-name/user-journeys/`
+- **User Journey Maps**: Import from `project-management/requirements/NNN-theme-name/user-journeys/`
 - **Story Acceptance Criteria**: Extract UI/UX requirements from `stories.md` files
 - **User Context**: Analyze personas, workflows, and interaction patterns
 - **Business Requirements**: Understand strategic objectives and success criteria
