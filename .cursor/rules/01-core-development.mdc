@@ -34,11 +34,23 @@ You are acting as a Lead Developer who MUST explain every design decision, promo
 
 # 💻 THE IMPLEMENTATION PHASE: CODE & COMPONENT DESIGN
 
+## Clean Architecture Patterns
+- **Layered Design**: Structure code into handlers/controllers, services/use cases, repositories/data access, and domain models.
+- **Domain-Driven Design**: Apply DDD principles for complex business domains with clear bounded contexts.
+- **Interface-First Development**: All public functions interact with interfaces, not concrete types, to enhance flexibility and testability.
+- **Composition over Inheritance**: Favor small, purpose-specific interfaces and composition patterns.
+
 ## Component & API Design
 - **Single Responsibility Principle**: Every component, function, and module must have ONE clear purpose.
 - **Modular Architecture**: Design loosely coupled, highly cohesive modules with clear boundaries. Separate concerns cleanly.
 - **Interface Segregation**: Define small, focused API contracts and interfaces before implementation.
 - **Dependency Injection**: Use composition and inject dependencies explicitly.
+
+## Project Organization Standards
+- **Consistent Structure**: Establish standard folder layouts (cmd/, internal/, pkg/, api/, configs/, test/) adapted to your technology stack.
+- **Feature Grouping**: Organize code by feature when it improves clarity and cohesion over purely technical grouping.
+- **Framework Decoupling**: Keep business logic independent of framework-specific code to enhance testability and maintainability.
+- **Clear Boundaries**: Separate core application logic from external dependencies and infrastructure concerns.
 
 ## Clean Code Practices
 - **Meaningful Naming**: Names of variables, functions, and classes must reveal their purpose.
@@ -50,9 +62,12 @@ You are acting as a Lead Developer who MUST explain every design decision, promo
 
 # ✅ THE VALIDATION PHASE: ENSURING QUALITY & EXCELLENCE
 
-## Comprehensive Testing
+## Testing Excellence
 - **Test-Driven Approach**: Write tests first to define contracts and drive API design.
-- **Full Coverage**: Implement unit, integration, and end-to-end tests for all critical logic and workflows.
+- **Testing Patterns**: Use table-driven tests with parallel execution where appropriate for comprehensive scenario coverage.
+- **Mock Strategy**: Mock external interfaces cleanly using generated or handwritten mocks to isolate units under test.
+- **Test Organization**: Separate fast unit tests from slower integration and E2E tests for efficient development workflows.
+- **Coverage Standards**: Ensure test coverage for every exported function with behavioral validation, not just line coverage.
 
 ## Robust Operations
 - **Error Handling**: Implement structured exception handling with meaningful, user-friendly error messages and recovery paths.
@@ -74,8 +89,11 @@ You are acting as a Lead Developer who MUST explain every design decision, promo
 - **Prevention Application**: Apply relevant lessons to prevent known issues and avoid past mistakes.
 - **Continuous Learning**: Reference lessons when making design decisions and architecture choices.
 
-## Documentation & Reporting
+## Documentation & Standards
+- **Code Documentation**: Document all public functions and packages with clear purpose, parameters, and return values.
+- **Project Documentation**: Maintain concise READMEs for services and libraries, plus CONTRIBUTING.md and ARCHITECTURE.md for team guidance.
 - **Living Documentation**: Keep all architectural diagrams, API documentation, and usage guides synchronized with the code.
+- **Code Standards**: Enforce naming consistency and formatting standards through automated tools and code reviews.
 - **Status Compliance**: Validate and update `project-status.md` accurately, reflecting all progress and blockers.
 - **Lesson Consultation**: Document how lessons learned influenced design decisions in architectural documentation.
 
