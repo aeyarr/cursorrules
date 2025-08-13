@@ -1,0 +1,136 @@
+# Atom/Design Change Request
+
+**Request ID**: ACR-YYYY-###  
+**Date**: YYYY-MM-DD  
+**Requesting Developer**: [Name]  
+**UX Designer**: [Assigned UX Designer]  
+**Priority**: [Critical/High/Medium/Low]  
+**Target File(s)**: [Specific protected CSS files requiring changes]
+
+---
+
+## Change Request Summary
+
+### What Needs to Change
+- **File(s) Affected**: List specific protected files (`design-tokens.css`, `themes.css`, `atoms.css`)
+- **Type of Change**: [Design Token Update/Atom Modification/Theme Addition/Bug Fix]
+- **Brief Description**: One-sentence summary of requested change
+
+### Business Justification
+- **User Impact**: How this change affects end users
+- **Technical Need**: Why this change is necessary for implementation
+- **Alternative Explored**: Other approaches considered and why they won't work
+
+---
+
+## Technical Details
+
+### Current State
+```css
+/* Current CSS that needs modification */
+.current-selector {
+    property: current-value;
+}
+```
+
+### Proposed Change
+```css
+/* Proposed CSS modification */
+.current-selector {
+    property: new-value;
+}
+```
+
+### Impact Analysis
+- **Components Affected**: List all components that will be impacted
+- **Breaking Changes**: Any existing implementations that will break
+- **Browser Compatibility**: Any compatibility concerns
+- **Performance Impact**: Load time or rendering performance effects
+
+---
+
+## Implementation Context
+
+### User Journey Context
+- **Feature**: Which feature/workflow requires this change
+- **User Type**: CLO Manager/Asset Manager/Deal Modeler/Investor/Issuer
+- **Journey Stage**: Where in the user journey this applies
+
+### Development Context
+- **Sprint**: Current sprint where this change is needed
+- **Epic/Story**: Related epic or story requiring this change
+- **Deadline**: When this change is needed by
+- **Dependencies**: Other tasks blocked by this change
+
+---
+
+## UX Review Requirements
+
+### Design System Impact
+- [ ] **Consistency Check**: Verify change maintains design system consistency
+- [ ] **Accessibility Review**: Ensure change meets WCAG 2.1 AA standards
+- [ ] **Material Design Compliance**: Confirm adherence to Material Design principles
+- [ ] **Cross-Workflow Impact**: Assess impact on other user workflows
+
+### Testing Requirements
+- [ ] **Visual Regression**: Test all affected components
+- [ ] **Browser Testing**: Verify across target browsers
+- [ ] **Accessibility Testing**: Screen reader and keyboard navigation
+- [ ] **Performance Testing**: Measure impact on load times
+
+---
+
+## UX Persona Response
+
+### UX Designer Review
+- **Status**: [Approved/Needs Revision/Rejected]
+- **Review Date**: YYYY-MM-DD
+- **Reviewer**: [UX Designer Name]
+
+### Approved Changes
+```css
+/* UX-approved CSS changes */
+.approved-selector {
+    property: approved-value;
+}
+```
+
+### Implementation Notes
+- **Modification Instructions**: Specific guidance for implementing approved changes
+- **Additional Requirements**: Any additional changes needed for consistency
+- **Rollback Plan**: How to revert if issues arise
+
+### Future Prevention
+- **Pattern Documentation**: How to avoid similar requests in future
+- **Design System Updates**: Any design system documentation that needs updating
+- **Developer Guidance**: Additional guidance for similar situations
+
+---
+
+## Implementation Tracking
+
+### Change Implementation
+- [ ] **Files Modified**: [List of files actually changed]
+- [ ] **Testing Completed**: [Verification tests performed]
+- [ ] **Documentation Updated**: [Any related documentation updates]
+- [ ] **UX Sign-off**: [Final UX approval on implementation]
+
+### Follow-up Actions
+- [ ] **Design System Documentation**: Update design system docs if needed
+- [ ] **Component Library Updates**: Update component documentation
+- [ ] **Team Communication**: Notify team of changes and new patterns
+- [ ] **Lesson Learned**: Document insights in lessons-learned repository
+
+---
+
+## Approval Chain
+
+**Developer Request**: [Date] - [Developer Name]  
+**UX Review**: [Date] - [UX Designer Name] - [Status]  
+**Implementation**: [Date] - [Developer Name]  
+**Final Sign-off**: [Date] - [UX Designer Name]
+
+---
+
+**Template Version**: 1.0  
+**Last Updated**: {{TODAY}}

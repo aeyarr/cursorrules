@@ -1,0 +1,100 @@
+# UX-to-Developer Handoff: {{FEATURE_NAME}}
+
+**Date**: {{HANDOFF_DATE}} | **UX Designer**: {{UX_DESIGNER}} | **Dev Team**: {{DEV_TEAM}}
+
+---
+
+## 📋 HANDOFF SCOPE
+
+**What's Being Handed Off**: {{BRIEF_DESCRIPTION}}  
+**User Workflow**: {{USER_JOURNEY_NAME}}  
+**Priority**: {{PRIORITY}} | **Target Sprint**: {{TARGET_SPRINT}}
+
+---
+
+## 📚 DESIGN DOCUMENTATION LINKS
+
+### Foundation
+- **Design Tokens**: → `/styles/design-tokens.css`
+- **Themes**: → `/styles/themes.css` 
+- **Atoms**: → `/styles/atoms.css`
+- **User Journey**: → `project-management/requirements/{{THEME_NAME}}/user-journeys/{{JOURNEY_NAME}}.md`
+
+### Components Required
+- **Atoms**: → {{ATOM_LINKS}}
+- **Molecules**: → {{MOLECULE_LINKS}}
+- **Organisms**: → {{ORGANISM_LINKS}}
+- **Templates**: → {{TEMPLATE_LINKS}}
+
+### Assembly Documentation
+- **Flow Assembly**: → `project-management/ux-design/flow-assembly/{{USER_TYPE}}-flow-assembly.md`
+
+---
+
+## 💻 DEVELOPER IMPLEMENTATION NOTES
+
+### CSS Architecture
+- **Protected Files**: DO NOT MODIFY `/styles/design-tokens.css`, `/styles/themes.css`, `/styles/atoms.css`
+- **Developer Files**: Create in `/styles/` directory:
+  - `molecules.css` (component combinations)
+  - `organisms.css` (complex interface sections)  
+  - `templates.css` (layout systems)
+  - Component-specific CSS files
+
+### Technical Priorities
+{{TECHNICAL_PRIORITIES}}
+
+### Performance Requirements
+{{PERFORMANCE_REQUIREMENTS}}
+
+### Integration Constraints  
+{{INTEGRATION_CONSTRAINTS}}
+
+---
+
+## ✅ DEVELOPMENT TASKS
+
+### Component Development
+{{COMPONENT_TASKS}}
+
+### Integration Tasks
+{{INTEGRATION_TASKS}}
+
+### CSS Implementation
+- [ ] Create `molecules.css` ({{MOLECULE_STORY_POINTS}} story points)
+- [ ] Create `organisms.css` ({{ORGANISM_STORY_POINTS}} story points)
+- [ ] Create `templates.css` ({{TEMPLATE_STORY_POINTS}} story points)
+- [ ] Component-specific CSS files ({{COMPONENT_CSS_STORY_POINTS}} story points)
+
+---
+
+## 🔍 SUCCESS CRITERIA
+
+- [ ] **Visual Accuracy**: Matches design specifications exactly
+- [ ] **Accessibility**: Passes WCAG 2.1 AA compliance testing
+- [ ] **Performance**: Meets specified load time targets
+- [ ] **CSS Architecture**: Follows atomic design hierarchy in `/styles/` directory
+- [ ] **File Protection**: No modifications to protected UX foundation files
+
+---
+
+## 📞 COMMUNICATION
+
+**Ready to Start**: {{READY_STATUS}}  
+**Blockers/Questions**: {{BLOCKERS_QUESTIONS}}
+
+### Change Request Process
+If modifications needed to protected files (`design-tokens.css`, `themes.css`, `atoms.css`):
+1. Use `.cursor/templates/atom-design-change-request.md.template`
+2. Submit to UX persona for review and approval
+3. UX persona will implement approved changes
+
+### Review Checkpoints
+- **Mid-Sprint Review**: {{MID_SPRINT_DATE}} - UX review of component progress
+- **Pre-Launch Review**: {{PRE_LAUNCH_DATE}} - Final UX sign-off on implementation
+
+---
+
+**Handoff Version**: 1.0  
+**Template Version**: 1.0  
+**Last Updated**: {{TODAY}}
