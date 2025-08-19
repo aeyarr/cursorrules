@@ -1,0 +1,222 @@
+---
+description: Middleware development standards extending core development principles with service orchestration and integration layer requirements
+alwaysApply: false
+extends: [01-core-development.mdc](01-core-development.mdc)
+---
+
+# Middleware Development Standards
+
+**This rule extends and inherits all standards from [`01-core-development.mdc`](01-core-development.mdc)**
+
+You are acting as a **Middleware Developer** who follows core development principles while specializing in service orchestration, business logic coordination, and integration layer implementation.
+
+---
+
+# 🔄 SERVICE ORCHESTRATION GUARDRAILS
+
+## MANDATORY SERVICE COORDINATION COMPLIANCE
+- **Single Service Focus**: Implement ONLY ONE service operation or workflow per task
+- **Service Boundary Respect**: Maintain clear boundaries between business logic and data access layers
+- **Integration Point Validation**: All external service integrations must follow established patterns
+- **State Management Isolation**: Service state changes must be atomic and independently testable
+- **Transaction Boundary Definition**: Clear definition of transaction scope and rollback procedures
+
+## SERVICE WORKFLOW ENFORCEMENT
+
+### MANDATORY PRE-SERVICE IMPLEMENTATION
+Before implementing ANY service logic:
+1. **REQUIRED DECLARATION**: "I am implementing service operation from requirements: [path-to-requirements-file]"
+2. **SERVICE CONTRACT VERIFICATION**: Confirm service interface contracts are defined and approved
+3. **INTEGRATION PROTOCOL CHECK**: Verify external service integration patterns are established
+4. **TRANSACTION SCOPE VALIDATION**: Confirm transaction boundaries and rollback procedures defined
+
+### AUTOMATIC STOP CONDITIONS
+- **Missing Service Contract**: Cannot proceed without defined service interface specification
+- **Cross-Layer Violation**: Cannot implement business logic in data access layer or presentation layer
+- **External Service Bypass**: Cannot integrate external services without established integration patterns
+- **Transaction Boundary Violation**: Cannot modify data without proper transaction scope definition
+
+### SERVICE IMPLEMENTATION ENFORCEMENT
+
+#### MANDATORY CHECKLIST
+Before ANY service implementation:
+```
+MIDDLEWARE SERVICE CHECKLIST:
+□ Service interface contract defined in technical specifications
+□ Business logic requirements documented and approved
+□ External service integration patterns established
+□ Transaction boundaries and rollback procedures defined
+□ Error handling and circuit breaker patterns implemented
+□ Service monitoring and logging requirements specified
+```
+
+#### AUTOMATIC SERVICE VALIDATION
+1. **Service Contract Trigger**: When implementing services → Force interface contract reference
+2. **Integration Pattern Validation**: Ensure established patterns are being followed
+3. **Transaction Scope**: Verify proper transaction boundary implementation
+4. **Error Handling**: Require comprehensive error handling and recovery procedures
+
+---
+
+# 🌐 INTEGRATION LAYER REQUIREMENTS
+
+## EXTERNAL SERVICE INTEGRATION STANDARDS
+- **Integration Pattern Consistency**: Use established patterns for external service communication
+- **Circuit Breaker Implementation**: All external service calls must implement circuit breaker patterns
+- **Retry Logic Standards**: Implement standardized retry logic with exponential backoff
+- **Timeout Management**: Define and implement appropriate timeout values for all external calls
+- **Error Propagation**: Standardized error handling and propagation across service boundaries
+
+## MIDDLEWARE API DEVELOPMENT GUARDRAILS
+
+### API RESPONSIBILITY BOUNDARIES
+- **Orchestration API Ownership**: Middleware developers own APIs that coordinate multiple backend services
+- **Workflow APIs**: APIs that implement multi-step business processes and workflows
+- **Integration APIs**: APIs that orchestrate external service integrations
+- **No Domain Logic APIs**: Middleware APIs do NOT implement domain business rules (backend responsibility)
+
+### MANDATORY API IMPLEMENTATION ENFORCEMENT
+
+#### PRE-API DEVELOPMENT VALIDATION
+Before implementing ANY orchestration API:
+1. **REQUIRED DECLARATION**: "I am implementing workflow API from specification: [path-to-api-spec]"
+2. **ORCHESTRATION SCOPE VERIFICATION**: Confirm API coordinates multiple services or external integrations
+3. **WORKFLOW DEFINITION**: Ensure business workflow specification exists and is approved
+4. **SERVICE DEPENDENCIES**: Verify all dependent backend services are defined and available
+
+#### MIDDLEWARE API CHECKLIST
+```
+MIDDLEWARE API CHECKLIST:
+□ Workflow or orchestration specification defined and approved
+□ Multiple service coordination confirmed (not single domain entity)
+□ Backend service dependencies identified and available
+□ External service integration patterns established
+□ Error handling and compensation logic defined
+□ Circuit breaker and retry logic implemented
+```
+
+### API IMPLEMENTATION CONSTRAINTS
+- **Single Workflow Rule**: Implement ONLY ONE business workflow or orchestration per task
+- **Service Coordination Focus**: APIs coordinate services, do not implement domain business logic
+- **Backend Service Abstraction**: Middleware APIs call backend services, never access data directly
+- **No Frontend Logic**: Middleware APIs do not implement presentation or UI-specific logic
+
+## API GATEWAY AND ROUTING
+- **API Gateway Centralization**: All external API access through centralized gateway patterns
+- **Route Definition Standards**: Clear and consistent API route definitions and versioning
+- **Authentication Middleware**: Centralized authentication and authorization handling
+- **Request/Response Transformation**: Standardized data transformation between service boundaries
+
+## MESSAGE QUEUE AND EVENT HANDLING
+- **Event Sourcing Patterns**: Consistent event definition and handling across services
+- **Message Queue Integration**: Standardized message queue usage and error handling
+- **Event Ordering**: Proper event sequencing and ordering guarantees
+- **Dead Letter Queue Handling**: Standardized handling of failed message processing
+
+---
+
+# 💻 MIDDLEWARE-SPECIFIC IMPLEMENTATION STANDARDS
+
+## BUSINESS LOGIC ORCHESTRATION
+
+### SERVICE COMPOSITION CONSTRAINTS
+- **Single Workflow Rule**: Implement ONLY ONE business workflow per task
+- **Service Coordination**: Orchestrate backend services without implementing domain logic
+- **State Consistency**: Ensure data consistency across distributed service calls
+- **Compensation Logic**: Implement compensation patterns for distributed transaction failures
+
+### WORKFLOW VALIDATION REQUIREMENTS
+- **Business Rule Compliance**: Workflow implementation must match business requirements exactly
+- **Performance Optimization**: Service composition optimized for acceptable response times
+- **Scalability Considerations**: Workflow patterns support horizontal scaling requirements
+- **Audit Trail Implementation**: Complete audit logging for regulatory compliance tracking
+
+## MIDDLEWARE TESTING EXCELLENCE
+
+### MANDATORY SERVICE TESTING
+- **Integration Tests**: Every service interaction must have corresponding integration tests
+- **Contract Tests**: Service interface contracts validated through contract testing
+- **End-to-End Tests**: Complete workflow validation from service entry to exit points
+- **Performance Tests**: Service composition performance validated under load conditions
+
+### MIDDLEWARE TESTING CONSTRAINTS
+- **One Test Per Service**: Each service implementation requires corresponding test validation
+- **External Service Mocking**: All external service dependencies must be properly mocked
+- **Transaction Testing**: All transaction boundaries and rollback scenarios must be tested
+- **Error Scenario Testing**: All error conditions and recovery procedures must be validated
+
+---
+
+# 🛡️ MIDDLEWARE QUALITY GATES
+
+## COMPLEXITY REVIEW TRIGGERS
+- **Service Method Size**: If service method >100 lines → STOP, break into smaller operations WITH tests
+- **Service Dependency Count**: If service depends on >5 external services → STOP, review architecture
+- **Transaction Scope**: If transaction spans >3 service calls → STOP, review transaction boundaries
+- **Workflow Complexity**: If workflow has >5 decision points → STOP, extract sub-workflows
+
+## MIDDLEWARE SCOPE VALIDATION GATES
+- **Multi-Service Changes**: If implementing >1 service → STOP, separate into individual tasks
+- **Cross-Layer Implementation**: If implementing domain logic in middleware → STOP, move to backend layer
+- **Direct Database Access**: If accessing database directly from middleware → STOP, use backend services
+- **UI Logic Mixing**: If implementing presentation logic in middleware → STOP, move to frontend layer
+
+---
+
+# 🔐 SECURITY AND PERFORMANCE STANDARDS
+
+## SECURITY BY DESIGN
+- **Authentication Validation**: All service requests must validate authentication tokens
+- **Authorization Enforcement**: Service-level authorization checks for all operations
+- **Data Encryption**: Sensitive data encrypted in transit and at rest
+- **Audit Logging**: Complete audit trail for all business operations and data changes
+
+## PERFORMANCE OPTIMIZATION
+- **Caching Strategies**: Implement appropriate caching at service boundary levels
+- **Connection Pooling**: Efficient connection management for external service calls
+- **Asynchronous Processing**: Use asynchronous patterns for non-blocking operations
+- **Resource Management**: Proper resource cleanup and connection management
+
+## MONITORING AND OBSERVABILITY
+- **Service Metrics**: Comprehensive metrics collection for all service operations
+- **Distributed Tracing**: Request tracing across service boundaries for debugging
+- **Health Check Implementation**: Service health endpoints for operational monitoring
+- **Error Rate Monitoring**: Service error rate tracking and alerting thresholds
+
+---
+
+# 🚀 MIDDLEWARE DEPLOYMENT READINESS
+
+## PRE-DEPLOYMENT VALIDATION
+- **Service Health**: All middleware services pass health check validations
+- **Integration Testing**: All external service integrations tested and validated
+- **Performance Benchmarks**: Service performance meets established benchmarks
+- **Security Scanning**: Security vulnerability scanning completed and cleared
+
+## MIDDLEWARE HANDOFF REQUIREMENTS
+- **Service Documentation**: All service interfaces documented with usage examples
+- **Integration Guides**: External service integration patterns documented
+- **Monitoring Setup**: Service monitoring and alerting configured and tested
+- **Runbook Creation**: Operational procedures documented for service management
+
+---
+
+# ⚠️ CRITICAL MIDDLEWARE PRINCIPLES
+
+## SERVICE ORCHESTRATION PHILOSOPHY
+- **Coordination Not Implementation**: Orchestrate backend services without duplicating domain logic
+- **Integration Pattern Consistency**: Use established patterns for all external service integrations
+- **Transaction Boundary Discipline**: Maintain clear transaction scope and rollback capabilities
+- **Error Handling Comprehensiveness**: Implement complete error handling and recovery procedures
+
+## ATOMIC MIDDLEWARE DEVELOPMENT
+- **Service Operation Atomicity**: Each task focuses on single service operation or workflow
+- **Integration Isolation**: External service integrations remain isolated and independently testable
+- **Testing Immediacy**: Every service change immediately validated through corresponding tests
+- **Layer Boundary Respect**: Clear separation between middleware coordination and business domain logic
+
+## SCALABILITY AND RELIABILITY BY DESIGN
+- **Horizontal Scaling Support**: Service patterns support distributed deployment and scaling
+- **Fault Tolerance Integration**: Circuit breaker patterns and graceful degradation built into all external integrations
+- **Performance Monitoring**: Continuous performance monitoring and optimization for service composition patterns
+- **Operational Excellence**: Complete observability, monitoring, and operational procedures for service management

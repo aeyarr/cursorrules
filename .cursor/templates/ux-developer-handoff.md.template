@@ -29,6 +29,11 @@
 ### Assembly Documentation
 - **Flow Assembly**: → `project-management/ux-design/flow-assembly/{{USER_TYPE}}-flow-assembly.md`
 
+### Visual Previews (User Approved)
+- **HTML Previews**: → `project-management/ux-design/visual-previews/{{USER_TYPE}}-preview.html`
+- **Approval Status**: ✅ User approved on {{APPROVAL_DATE}}
+- **Implementation Target**: Match approved visual preview exactly
+
 ---
 
 ## 💻 DEVELOPER IMPLEMENTATION NOTES

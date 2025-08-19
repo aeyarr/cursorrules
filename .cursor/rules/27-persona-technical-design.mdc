@@ -119,37 +119,130 @@ project-management/technical-design/
 - **Error Handling**: Data error detection, reporting, and recovery procedures
 - **Audit Requirements**: Data change tracking and regulatory compliance logging
 
-### Interface and Component Architecture
+### LAYERED API CONTRACT SPECIFICATIONS
 
-**Internal and External Interfaces**
-- **Component Communication**: How system parts interact and share information
-- **External System Integration**: Third-party services, APIs, and data sources
-- **User Interface Integration**: Frontend-backend communication patterns
-- **Security Interfaces**: Authentication, authorization, and data protection mechanisms
+**API Contract Definition Framework**
+- **OpenAPI Specifications**: All APIs must have comprehensive OpenAPI 3.0 specifications
+- **Contract-First Development**: API contracts defined before implementation across all layers
+- **Version Management**: Semantic versioning for all API contracts with backward compatibility
+- **Testing Contracts**: Contract testing validation between layers
 
-**API Specifications and Protocols**
-- **API Contracts**: Detailed specifications for all internal and external APIs
-- **Communication Protocols**: HTTP, WebSocket, message queue implementations
-- **Data Formats**: JSON, XML, binary format standards and validation
-- **Version Management**: API versioning strategy and backward compatibility
+**Layer-Specific API Contract Requirements**
 
-**Component Functionality and Responsibilities**
-- **Component Boundaries**: Clear definition of each component's scope and purpose
-- **Responsibility Assignment**: What each component does and doesn't handle
-- **Dependency Mapping**: Component interdependencies and initialization order
-- **Error Propagation**: How errors flow through component hierarchy
+**Backend API Contracts**
+```
+Domain Entity APIs:
+├── Entity CRUD operations (GET, POST, PUT, DELETE)
+├── Business rule validation endpoints
+├── Repository abstraction interfaces
+└── Domain event publication contracts
 
-**Input/Output Specifications**
-- **Component Interfaces**: Input parameters, output formats, and data types
-- **Validation Requirements**: Input checking and output format verification
-- **Performance Specifications**: Response time, throughput, and resource usage
-- **Error Conditions**: Exception handling and error response formats
+API Specification Requirements:
+├── OpenAPI 3.0 specification for each domain entity
+├── Authentication and authorization requirements
+├── Input validation and error response schemas
+└── Repository interface contracts (not exposed externally)
+```
 
-**UX Requirements Assembly**
-- **Component Implementation**: How UX specifications translate to technical components
-- **User Interaction Patterns**: Technical implementation of user workflows
-- **State Management**: UI state coordination and data synchronization
-- **Responsive Behavior**: Technical implementation of desktop-first design patterns
+**Middleware API Contracts**
+```
+Orchestration Workflow APIs:
+├── Multi-step business process endpoints
+├── Service composition operations
+├── External service integration orchestration
+└── Cross-cutting concern coordination
+
+API Specification Requirements:
+├── Workflow definition specifications
+├── Backend service dependency contracts
+├── External service integration specifications
+└── Error handling and compensation logic contracts
+```
+
+**Frontend API Contracts**
+```
+Client-Side Service APIs:
+├── UI state management interfaces
+├── External service consumption contracts
+├── Authentication and session management
+└── Client-side analytics and monitoring
+
+API Specification Requirements:
+├── Component interaction specifications
+├── Backend/middleware service consumption contracts
+├── External service integration specifications
+└── User experience and error handling contracts
+```
+
+### CROSS-LAYER INTEGRATION SPECIFICATIONS
+
+**Integration Protocol Standards**
+- **Service Communication**: Standardized communication patterns between layers
+- **Data Transformation**: Request/response transformation specifications between layers
+- **Error Propagation**: Consistent error handling and propagation across layer boundaries
+- **Authentication Flow**: Token-based authentication across frontend, middleware, and backend layers
+
+### LAYER INTEGRATION COORDINATION FRAMEWORK
+
+**Frontend-Backend Integration Specifications**
+```
+API Contract Integration:
+├── Backend exposes domain entity APIs via OpenAPI specs
+├── Frontend implements client libraries from OpenAPI contracts
+├── Authentication token flow (backend JWT → frontend storage)
+└── Error response standardization (backend errors → frontend user messages)
+
+Data Flow Coordination:
+├── Backend domain models → Frontend TypeScript interfaces
+├── Repository patterns → Frontend service abstractions
+├── Domain events → Frontend state updates
+└── Business rule validation → Frontend form validation
+```
+
+**Backend-Middleware Integration Specifications**
+```
+Service Coordination:
+├── Backend exposes service interfaces → Middleware orchestrates calls
+├── Domain event publication → Middleware event consumption
+├── Transaction boundary coordination → Middleware workflow management
+└── Repository abstractions → Middleware service composition
+
+Performance Integration:
+├── Backend query optimization → Middleware caching strategies
+├── Domain service performance → Middleware timeout configuration
+├── Database connection pooling → Middleware resource management
+└── Backend monitoring metrics → Middleware aggregation and alerting
+```
+
+**Middleware-Frontend Integration Specifications**
+```
+Workflow Coordination:
+├── Middleware workflow APIs → Frontend process consumption
+├── Service orchestration results → Frontend state synchronization
+├── External service integration → Frontend user experience coordination
+└── Business process status → Frontend progress indication
+
+Real-time Communication:
+├── Middleware event broadcasting → Frontend real-time updates
+├── Workflow state changes → Frontend UI state synchronization
+├── Service integration status → Frontend loading and error states
+└── Business process completion → Frontend user notification
+```
+
+### INTEGRATION HANDOFF PROTOCOLS
+
+**Layer Boundary Validation**
+- **Interface Contract Compliance**: All layer interactions through defined contracts only
+- **Dependency Direction Enforcement**: Dependencies flow inward (Frontend → Middleware → Backend)
+- **Shared Resource Coordination**: Cross-layer shared resources require explicit coordination approval
+- **Integration Point Testing**: All layer handoffs validated through automated integration testing
+
+**API Integration Workflow**
+1. **Contract Definition Phase**: OpenAPI specifications defined for all layer interfaces
+2. **Contract Validation Phase**: Contract testing implemented between consuming and providing layers
+3. **Implementation Phase**: Layer-specific implementation following contract specifications
+4. **Integration Testing Phase**: End-to-end testing across layer boundaries
+5. **Documentation Phase**: Integration patterns and usage examples documented
 
 ---
 
@@ -176,38 +269,128 @@ project-management/technical-design/
 - Security framework setup
 - Testing infrastructure
 
-### Development Task Documentation
-**Task Specification Format**
+### ENHANCED TASK DOCUMENTATION WITH LAYER AWARENESS
+
+**Layer-Aware Task Specification Format**
 - **Task ID**: Sequential numbering with phase prefix (P001-T001)
-- **Task Name**: Clear, actionable task description
+- **Task Name**: Clear, actionable task description with layer identification
+- **Layer Assignment**: Primary layer (Frontend/Backend/Middleware) and developer type required
+- **Development Rules**: Specific development rule files that apply to this task
 - **Requirements Link**: Traceability to specific stories/epics
-- **UX Component**: Link to specific UX design specifications
+- **API Contract Reference**: Link to relevant API specifications (if applicable)
+- **UX Component**: Link to specific UX design specifications (Frontend tasks)
+- **Integration Dependencies**: Cross-layer dependencies and handoff requirements
 - **Complexity Rating**: Simple/Medium/Complex/Critical assessment
 - **Forward Dependencies**: Tasks that depend on this completion
 - **Backward Dependencies**: Tasks this depends on for completion
-- **Technical Specifications**: Detailed implementation requirements
-- **Acceptance Criteria**: Definition of done for task completion
+- **Technical Specifications**: Detailed implementation requirements including layer-specific constraints
+- **Acceptance Criteria**: Definition of done including layer-specific validation requirements
 
-**Task Categories and Examples**
+**Enhanced Task Examples**
+
+**Frontend Task Example**
 ```
-Frontend Tasks:
-├── Component Implementation (React components from UX specs)
-├── State Management (Redux/Context API implementation)
-├── API Integration (Frontend-backend communication)
-└── UI Testing (Component and integration testing)
-
-Backend Tasks:
-├── API Development (REST/GraphQL endpoint creation)
-├── Business Logic (Core functionality implementation)
-├── Data Access (Database queries and ORM setup)
-└── Service Integration (External system connections)
-
-Infrastructure Tasks:
-├── Environment Setup (Development and deployment environments)
-├── Database Design (Schema creation and optimization)
-├── Security Implementation (Authentication and authorization)
-└── DevOps Configuration (CI/CD pipelines and monitoring)
+Task ID: P001-T001
+Task Name: Implement Portfolio Risk Component (Atom-level)
+Layer Assignment: Frontend Developer (10-frontend-development.mdc)
+Development Rules: 01-core-development.mdc + 10-frontend-development.mdc
+Requirements Link: /project-management/requirements/001-portfolio-theme/stories.md#story-003
+API Contract Reference: /api/contracts/backend-portfolio-api.yaml (consumption only)
+UX Component: /project-management/ux-design/component-library/01-atoms/data-cells.md
+Integration Dependencies: Backend Portfolio API (P001-T005), UX Design System
+Technical Specifications: Single atomic component, design system compliance, WCAG 2.1 AA
+Acceptance Criteria: Component matches UX spec, passes accessibility tests, consumes backend API correctly
 ```
+
+**Backend Task Example**
+```
+Task ID: P001-T005
+Task Name: Implement Portfolio Domain Entity API
+Layer Assignment: Backend Developer (12-backend-development.mdc)
+Development Rules: 01-core-development.mdc + 12-backend-development.mdc
+Requirements Link: /project-management/requirements/001-portfolio-theme/stories.md#story-001
+API Contract Reference: /api/contracts/backend-portfolio-api.yaml (provider)
+Integration Dependencies: Portfolio Repository (P001-T006), Middleware Portfolio Service (P001-T010)
+Technical Specifications: Single domain entity, repository pattern, OpenAPI specification
+Acceptance Criteria: API contract implemented, unit tests pass, repository abstraction used
+```
+
+**Middleware Task Example**
+```
+Task ID: P001-T010
+Task Name: Implement Portfolio Analysis Workflow API
+Layer Assignment: Middleware Developer (11-middleware-development.mdc)
+Development Rules: 01-core-development.mdc + 11-middleware-development.mdc
+Requirements Link: /project-management/requirements/001-portfolio-theme/stories.md#story-002
+API Contract Reference: /api/contracts/middleware-workflow-api.yaml (provider)
+Integration Dependencies: Backend Portfolio API (P001-T005), Backend Risk API (P001-T007)
+Technical Specifications: Multi-service orchestration, circuit breaker patterns, workflow state management
+Acceptance Criteria: Workflow API implemented, backend services orchestrated, error handling comprehensive
+```
+
+## LAYER-AWARE TASK ASSIGNMENT FRAMEWORK
+
+### DEVELOPMENT LAYER SPECIALIZATION
+**Layer-Specific Rule Compliance**
+- **Frontend Developers**: Follow [`01-core-development.mdc`](01-core-development.mdc) + [`10-frontend-development.mdc`](10-frontend-development.mdc)
+- **Middleware Developers**: Follow [`01-core-development.mdc`](01-core-development.mdc) + [`11-middleware-development.mdc`](11-middleware-development.mdc)  
+- **Backend Developers**: Follow [`01-core-development.mdc`](01-core-development.mdc) + [`12-backend-development.mdc`](12-backend-development.mdc)
+- **Full-Stack Developers**: Must follow applicable layer rules for each task assignment
+
+### LAYER-SPECIFIC TASK ASSIGNMENT METHODOLOGY
+
+**Frontend Developer Tasks**
+```
+Component Development:
+├── Single component implementation (atoms/molecules/organisms/templates)
+├── Component state management (single state slice per task)
+├── UX integration (design system compliance, handoff workflow)
+└── Client-side API integration (UI state, external service consumption)
+
+Frontend API Tasks:
+├── Client-side service APIs (authentication, analytics)
+├── External integration APIs (third-party widgets, services)
+├── UI state management APIs (component interaction)
+└── Frontend service consumption (backend/middleware API calls)
+```
+
+**Middleware Developer Tasks**
+```
+Service Orchestration:
+├── Business workflow implementation (single workflow per task)
+├── Service coordination (multiple backend service calls)
+├── External service integration (third-party system orchestration)
+└── Cross-cutting concern implementation (logging, monitoring)
+
+Middleware API Tasks:
+├── Workflow orchestration APIs (multi-step business processes)
+├── Service composition APIs (backend service coordination)
+├── Integration layer APIs (external system orchestration)
+└── API gateway configuration (routing, transformation)
+```
+
+**Backend Developer Tasks**
+```
+Domain Logic Implementation:
+├── Domain entity implementation (single entity per task)
+├── Business rule enforcement (single rule or invariant per task)
+├── Repository pattern implementation (single aggregate per task)
+└── Domain event implementation (single event type per task)
+
+Backend API Tasks:
+├── Domain entity APIs (single entity CRUD operations)
+├── Business rule APIs (domain operation endpoints)
+├── Repository APIs (data access abstraction)
+└── Domain service APIs (business logic operations)
+```
+
+### TASK ASSIGNMENT VALIDATION PROTOCOL
+Before assigning ANY development task:
+1. **Layer Classification**: Identify primary layer (Frontend/Backend/Middleware)
+2. **Developer Type Assignment**: Match task to appropriate specialist
+3. **Rule Compliance Specification**: Identify which development rules apply
+4. **API Responsibility Verification**: Confirm API ownership aligns with layer boundaries
+5. **Integration Dependencies**: Map cross-layer dependencies and handoff requirements
 
 ## TECHNOLOGY STACK DECISION FRAMEWORK
 

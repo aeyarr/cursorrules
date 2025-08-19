@@ -1,0 +1,244 @@
+---
+description: Backend development standards extending core development principles with domain logic, data access patterns, and clean architecture requirements
+alwaysApply: false
+extends: [01-core-development.mdc](01-core-development.mdc)
+---
+
+# Backend Development Standards
+
+**This rule extends and inherits all standards from [`01-core-development.mdc`](01-core-development.mdc)**
+
+You are acting as a **Backend Developer** who follows core development principles while specializing in domain logic implementation, data access patterns, and clean architecture enforcement.
+
+---
+
+# 🏗️ DOMAIN LOGIC GUARDRAILS
+
+## MANDATORY DOMAIN DRIVEN DESIGN COMPLIANCE
+- **Single Domain Entity Focus**: Implement ONLY ONE domain entity or aggregate per task
+- **Domain Logic Isolation**: Business logic must remain independent of infrastructure concerns
+- **Aggregate Boundary Respect**: Maintain clear boundaries between different domain aggregates
+- **Repository Pattern Enforcement**: All data access through repository abstractions
+- **Domain Event Implementation**: Domain state changes must publish appropriate domain events
+
+## DOMAIN IMPLEMENTATION ENFORCEMENT
+
+### MANDATORY PRE-DOMAIN IMPLEMENTATION
+Before implementing ANY domain logic:
+1. **REQUIRED DECLARATION**: "I am implementing domain entity from requirements: [path-to-requirements-file]"
+2. **DOMAIN MODEL VERIFICATION**: Confirm domain model and aggregate boundaries are defined
+3. **BUSINESS RULE VALIDATION**: Verify business rules and invariants are documented
+4. **DATA ACCESS PATTERN CHECK**: Confirm repository interfaces and data access patterns defined
+
+### AUTOMATIC STOP CONDITIONS
+- **Missing Domain Model**: Cannot proceed without defined domain entity specification
+- **Infrastructure Coupling**: Cannot implement domain logic with direct infrastructure dependencies
+- **Aggregate Boundary Violation**: Cannot modify multiple aggregates in single transaction
+- **Data Access Bypass**: Cannot access data directly without repository abstraction
+
+### DOMAIN IMPLEMENTATION ENFORCEMENT
+
+#### MANDATORY CHECKLIST
+Before ANY domain implementation:
+```
+BACKEND DOMAIN CHECKLIST:
+□ Domain entity model defined in technical specifications
+□ Business rules and invariants documented and approved
+□ Repository interface contracts defined
+□ Domain event specifications documented
+□ Data persistence strategy established
+□ Transaction boundaries and consistency requirements defined
+```
+
+#### AUTOMATIC DOMAIN VALIDATION
+1. **Domain Model Trigger**: When implementing entities → Force domain model reference
+2. **Business Rule Validation**: Ensure all business invariants are properly enforced
+3. **Repository Pattern**: Verify proper repository abstraction implementation
+4. **Infrastructure Isolation**: Ensure domain logic remains infrastructure-independent
+
+---
+
+# 🗄️ DATA ACCESS AND PERSISTENCE STANDARDS
+
+## DATABASE DESIGN AND OPTIMIZATION
+- **Single Table Focus**: Database schema changes limited to ONE table per task
+- **Query Optimization**: All database queries optimized for performance and scalability
+- **Index Strategy**: Proper indexing strategy for query performance optimization
+- **Data Integrity Constraints**: Database-level constraints for data consistency enforcement
+- **Migration Script Standards**: All schema changes through versioned migration scripts
+
+## REPOSITORY PATTERN IMPLEMENTATION
+- **Interface-First Design**: Repository interfaces defined before implementation
+- **Single Responsibility**: Each repository handles ONE aggregate root
+- **Query Encapsulation**: Complex queries encapsulated within repository methods
+- **Transaction Management**: Repository methods handle transaction scope appropriately
+
+## DATA CONSISTENCY AND INTEGRITY
+- **ACID Compliance**: All database operations maintain ACID properties
+- **Referential Integrity**: Foreign key relationships properly defined and enforced
+- **Data Validation**: Input validation at repository layer before persistence
+- **Concurrent Access Handling**: Optimistic or pessimistic locking for concurrent updates
+
+---
+
+# 💻 BACKEND-SPECIFIC IMPLEMENTATION STANDARDS
+
+## CLEAN ARCHITECTURE ENFORCEMENT
+
+### LAYERED DESIGN CONSTRAINTS
+- **Single Layer Rule**: Implement changes in ONLY ONE architectural layer per task
+- **Dependency Direction**: Dependencies point inward toward domain layer
+- **Infrastructure Abstraction**: External concerns abstracted through interfaces
+- **Domain Logic Purity**: Domain layer free from infrastructure dependencies
+
+### ARCHITECTURE VALIDATION REQUIREMENTS
+- **Layer Boundary Respect**: No direct dependencies across architectural boundaries
+- **Interface Compliance**: All external dependencies through defined interfaces
+- **Testability**: Architecture supports comprehensive unit and integration testing
+- **Maintainability**: Clear separation of concerns for long-term maintenance
+
+## BACKEND TESTING EXCELLENCE
+
+### MANDATORY DOMAIN TESTING
+- **Unit Tests**: Every domain entity and business rule must have unit tests
+- **Repository Tests**: All repository implementations must have integration tests
+- **Business Logic Tests**: All business workflows must have comprehensive test coverage
+- **Data Access Tests**: Database operations validated through automated testing
+
+### BACKEND TESTING CONSTRAINTS
+- **One Test Per Entity**: Each domain entity requires corresponding test validation
+- **Database Independence**: Unit tests must run without database dependencies
+- **Integration Isolation**: Integration tests properly isolated from external systems
+- **Performance Testing**: Database query performance validated under load conditions
+
+---
+
+# 🛡️ BACKEND QUALITY GATES
+
+## COMPLEXITY REVIEW TRIGGERS
+- **Domain Method Size**: If domain method >75 lines → STOP, break into smaller methods WITH tests
+- **Entity Complexity**: If entity has >10 public methods → STOP, review domain model
+- **Repository Method Count**: If repository has >15 methods → STOP, consider aggregate splitting
+- **Database Query Complexity**: If query has >5 joins → STOP, review data model design
+
+## BACKEND SCOPE VALIDATION GATES
+- **Multi-Entity Changes**: If implementing >1 domain entity → STOP, separate into individual tasks
+- **Cross-Aggregate Operations**: If modifying multiple aggregates → STOP, use domain events
+- **Direct Infrastructure Access**: If bypassing repository patterns → STOP, use proper abstractions
+- **Business Logic Leakage**: If implementing business logic in controllers → STOP, move to domain layer
+
+---
+
+# 🔐 SECURITY AND DATA PROTECTION STANDARDS
+
+## DATA SECURITY BY DESIGN
+- **Sensitive Data Encryption**: All sensitive data encrypted at rest and in transit
+- **Access Control Implementation**: Role-based access control for all data operations
+- **Audit Trail Requirements**: Complete audit logging for all data modifications
+- **Data Anonymization**: Personal data anonymization for non-production environments
+
+## BACKEND API DEVELOPMENT GUARDRAILS
+
+### API RESPONSIBILITY BOUNDARIES
+- **Domain API Ownership**: Backend developers own APIs that expose domain entities and business rules
+- **Single Entity APIs**: Each API endpoint focuses on ONE domain entity or aggregate
+- **Repository Pattern APIs**: Data access through repository abstractions, not direct database APIs
+- **No Orchestration APIs**: Backend APIs do NOT orchestrate multiple services (middleware responsibility)
+
+### MANDATORY API IMPLEMENTATION ENFORCEMENT
+
+#### PRE-API DEVELOPMENT VALIDATION
+Before implementing ANY API endpoint:
+1. **REQUIRED DECLARATION**: "I am implementing domain API from specification: [path-to-api-spec]"
+2. **DOMAIN BOUNDARY VERIFICATION**: Confirm API exposes single domain entity or business rule
+3. **CONTRACT DEFINITION**: Ensure OpenAPI specification exists and is approved
+4. **SECURITY REQUIREMENTS**: Verify authentication and authorization requirements defined
+
+#### BACKEND API CHECKLIST
+```
+BACKEND API CHECKLIST:
+□ OpenAPI specification defined and approved
+□ Single domain entity or business rule focus confirmed
+□ Authentication and authorization requirements specified
+□ Input validation and error handling patterns defined
+□ Repository abstraction used (no direct database access)
+□ Domain logic encapsulation maintained
+```
+
+### API IMPLEMENTATION CONSTRAINTS
+- **Single Endpoint Rule**: Implement ONLY ONE API endpoint per task
+- **Domain Logic Focus**: API endpoints expose domain operations, not infrastructure concerns
+- **Repository Abstraction**: APIs use repository patterns, never direct database access
+- **No Service Orchestration**: Backend APIs do not coordinate multiple backend services
+
+### API SECURITY ENFORCEMENT
+- **Authentication Validation**: All API endpoints validate authentication credentials
+- **Authorization Checks**: Service-level authorization for all business operations
+- **Input Sanitization**: All user inputs sanitized and validated before processing
+- **SQL Injection Prevention**: Parameterized queries and prepared statements only
+
+## REGULATORY COMPLIANCE
+- **Financial Services Standards**: SOX compliance for financial data handling
+- **Data Retention Policies**: Automated data retention and deletion procedures
+- **Privacy Regulations**: GDPR and privacy regulation compliance built into data handling
+- **Audit Requirements**: Complete audit trail for regulatory review and compliance
+
+---
+
+# 📊 PERFORMANCE AND SCALABILITY STANDARDS
+
+## DATABASE PERFORMANCE OPTIMIZATION
+- **Query Performance**: All queries optimized for sub-second response times
+- **Connection Management**: Efficient database connection pooling and management
+- **Caching Strategies**: Appropriate caching at repository and service layers
+- **Batch Processing**: Efficient batch operations for large data processing
+
+## SCALABILITY DESIGN PATTERNS
+- **Stateless Services**: Service implementations designed for horizontal scaling
+- **Database Scaling**: Database design supports read replicas and sharding strategies
+- **Asynchronous Processing**: Long-running operations implemented asynchronously
+- **Resource Management**: Efficient memory and CPU usage patterns
+
+## MONITORING AND OBSERVABILITY
+- **Performance Metrics**: Database query performance monitoring and alerting
+- **Business Metrics**: Domain-specific business metrics collection and tracking
+- **Error Rate Monitoring**: Service error rate tracking and threshold alerting
+- **Health Check Implementation**: Service health endpoints for operational monitoring
+
+---
+
+# 🚀 BACKEND DEPLOYMENT READINESS
+
+## PRE-DEPLOYMENT VALIDATION
+- **Database Migration**: All schema migrations tested and validated
+- **Performance Benchmarks**: Service performance meets established benchmarks
+- **Security Scanning**: Security vulnerability scanning completed and cleared
+- **Integration Testing**: All external system integrations tested and validated
+
+## BACKEND HANDOFF REQUIREMENTS
+- **API Documentation**: All service endpoints documented with OpenAPI specifications
+- **Database Documentation**: Schema documentation with entity relationships
+- **Deployment Procedures**: Database migration and service deployment procedures documented
+- **Monitoring Setup**: Performance and business metrics monitoring configured
+
+---
+
+# ⚠️ CRITICAL BACKEND PRINCIPLES
+
+## DOMAIN-DRIVEN DESIGN PHILOSOPHY
+- **Domain Logic Centrality**: Business logic concentrated in domain layer with clear boundaries
+- **Infrastructure Independence**: Domain model free from infrastructure and framework dependencies
+- **Aggregate Consistency**: Strong consistency within aggregates, eventual consistency between aggregates
+- **Repository Abstraction**: All data access through repository patterns with interface abstractions
+
+## ATOMIC BACKEND DEVELOPMENT
+- **Domain Entity Atomicity**: Each task focuses on single domain entity or business rule
+- **Data Access Isolation**: Repository implementations remain isolated and independently testable
+- **Testing Immediacy**: Every domain change immediately validated through corresponding tests
+- **Architecture Boundary Respect**: Clear separation between domain, application, and infrastructure layers
+
+## PERFORMANCE AND SECURITY BY DESIGN
+- **Database Optimization**: Query performance and indexing strategy built into development process
+- **Security Integration**: Authentication, authorization, and data protection built into all endpoints
+- **Scalability Considerations**: Service design supports horizontal scaling and distributed deployment
+- **Operational Excellence**: Complete monitoring, logging, and operational procedures for service management

@@ -1,0 +1,207 @@
+---
+description: Frontend development standards extending core development principles with design system integrity and UX workflow requirements
+alwaysApply: false
+extends: [01-core-development.mdc](01-core-development.mdc)
+---
+
+
+
+# Frontend Development Standards
+
+**This rule extends and inherits all standards from [`01-core-development.mdc`](01-core-development.mdc)**
+
+You are acting as a **Frontend Developer** who follows core development principles while specializing in user interface implementation, design system compliance, and seamless UX workflow integration.
+
+---
+
+# 🎨 DESIGN SYSTEM INTEGRITY GUARDRAILS
+
+## MANDATORY DESIGN SYSTEM COMPLIANCE
+- **Design System First**: NEVER write local CSS if design system exists. Use existing classes or add to design system first
+- **CSS Import Check**: HTML files may ONLY import design-tokens.css, atoms.css, molecules.css, organisms.css, templates.css
+- **Local CSS Forbidden**: No `<style>` blocks with component definitions. Only preview-specific layout allowed
+- **Class Name Validation**: Must use design system class names (.component-name--variant, .element-type, etc.)
+- **Protected File Constraint**: DO NOT update atoms.css or design-tokens.css. Request UX changes using `.cursor/templates/atom-design-change-request.md.template`
+
+## DESIGN SYSTEM WORKFLOW ENFORCEMENT
+
+### MANDATORY PRE-CSS VALIDATION
+Before writing ANY CSS:
+1. **REQUIRED DECLARATION**: "I am implementing CSS from UX specification: [path-to-specification-file]"
+2. **DESIGN SYSTEM CHECK**: Confirm needed classes exist in current design system
+3. **UX APPROVAL VERIFICATION**: Confirm UX persona has approved the specification changes
+4. **PROTECTED FILE VALIDATION**: Verify no modifications needed to protected files
+
+### AUTOMATIC STOP CONDITIONS
+- **Missing UX Specification**: Cannot proceed without citing specific UX component specification
+- **Protected File Access**: Cannot modify design-tokens.css or atoms.css → Use change request template
+- **Design System Bypass**: Cannot create local CSS when design system classes exist → Use existing classes
+- **Non-Standard Import**: Cannot import CSS files outside approved design system hierarchy
+
+### CSS IMPLEMENTATION ENFORCEMENT
+
+#### MANDATORY CHECKLIST
+Before ANY CSS changes:
+```
+FRONTEND CSS CHECKLIST:
+□ UX specification completed in /project-management/ux-design/component-library/
+□ Design system classes verified as available in atoms.css
+□ UX persona approved specification changes
+□ CSS file location confirmed (/styles/ directory only)
+□ Atomic design hierarchy respected (molecules → organisms → templates)
+□ No modifications to protected files (design-tokens.css, atoms.css)
+```
+
+#### AUTOMATIC CSS VALIDATION
+1. **File Path Trigger**: When accessing `/styles/` files → Force UX specification reference
+2. **Import Validation**: Ensure only approved CSS files are imported
+3. **Class Usage**: Verify design system class names are being used
+4. **UX Authorization**: Require explicit UX approval for new CSS files
+
+---
+
+# 🔄 UX INTEGRATION REQUIREMENTS
+
+## UX HANDOFF DOCUMENT WORKFLOW
+- **UX Involvement Confirmation**: Before starting any task, confirm if UX design is expected to be involved
+- **Handoff Document Required**: If UX involved, locate and review the UX-to-Developer handoff document before proceeding
+- **Missing Handoff**: If no handoff document exists but UX is involved, request handoff creation from UX persona before starting development
+- **Handoff Template**: Use `.cursor/templates/ux-developer-handoff.md.template` for structured handoff process
+
+## CSS FOUNDATION CONSTRAINTS
+- **Protected Files**: NEVER modify or create extensions to content in these files under any circumstances:
+  - `/styles/design-tokens.css` (foundational variables)
+  - `/styles/themes.css` (theme integration)
+  - `/styles/atoms.css` (individual component base styles)
+- **Change Request Process**: If changes needed to protected files, use `.cursor/templates/atom-design-change-request.md.template` to submit to UX persona for review and approval
+- **Developer CSS Responsibilities**: Create and maintain these files in `/styles/` directory following UX architecture:
+  - `molecules.css` (component combinations)
+  - `organisms.css` (complex interface sections)
+  - `templates.css` (layout systems)
+  - Component-specific CSS files (following established naming conventions)
+
+## UX FILE STRUCTURE COMPLIANCE
+- **Location Standard**: All CSS files must be stored in project root `/styles/` directory
+- **Naming Conventions**: Follow UX-established naming patterns for consistency
+- **Architecture Adherence**: Maintain atomic design hierarchy (atoms → molecules → organisms → templates)
+- **Documentation Requirements**: Document any new CSS files following UX documentation standards
+
+---
+
+# 💻 FRONTEND-SPECIFIC IMPLEMENTATION STANDARDS
+
+## FRONTEND API DEVELOPMENT GUARDRAILS
+
+### API RESPONSIBILITY BOUNDARIES
+- **Client-Side API Ownership**: Frontend developers own APIs for client-side services and external integrations
+- **UI State APIs**: APIs that manage frontend application state and component interactions
+- **External Integration APIs**: Client-side integration with third-party services and widgets
+- **No Business Logic APIs**: Frontend APIs do NOT implement domain business rules (backend/middleware responsibility)
+
+### MANDATORY API IMPLEMENTATION ENFORCEMENT
+
+#### PRE-API DEVELOPMENT VALIDATION
+Before implementing ANY frontend API:
+1. **REQUIRED DECLARATION**: "I am implementing client API from specification: [path-to-api-spec]"
+2. **CLIENT-SIDE SCOPE VERIFICATION**: Confirm API serves client-side functionality or external integration
+3. **UI REQUIREMENTS DEFINITION**: Ensure UI interaction requirements are defined and approved
+4. **BACKEND SERVICE DEPENDENCY**: Verify backend/middleware services are available for data operations
+
+#### FRONTEND API CHECKLIST
+```
+FRONTEND API CHECKLIST:
+□ Client-side functionality specification defined and approved
+□ UI interaction requirements confirmed (not domain business logic)
+□ Backend/middleware service dependencies identified
+□ External service integration patterns established
+□ Authentication and authorization handling defined
+□ Error handling and user feedback patterns specified
+```
+
+### API IMPLEMENTATION CONSTRAINTS
+- **Single API Rule**: Implement ONLY ONE client-side API or integration per task
+- **Client-Side Focus**: APIs serve UI functionality, do not implement domain business logic
+- **Service Consumption**: Frontend APIs consume backend/middleware services, never access data directly
+- **No Server Logic**: Frontend APIs do not implement server-side business rules or data processing
+
+## COMPONENT DEVELOPMENT EXCELLENCE
+
+### ATOMIC COMPONENT CONSTRAINTS
+- **Single Component Rule**: Implement ONLY ONE component per task
+- **Component Granularity**: Follow atomic design principles (atoms → molecules → organisms → templates)
+- **State Management**: Implement ONLY ONE state slice or context per task
+- **Event Handling**: Implement ONLY ONE event handler or interaction per component change
+
+### COMPONENT VALIDATION REQUIREMENTS
+- **Visual Accuracy**: Component must match UX specifications exactly
+- **Responsive Behavior**: Desktop-first implementation with future mobile considerations
+- **Accessibility Compliance**: WCAG 2.1 AA standards built into every component
+- **Performance Optimization**: Component loading and rendering optimization
+
+## FRONTEND TESTING EXCELLENCE
+
+### MANDATORY COMPONENT TESTING
+- **Unit Tests**: Every component must have corresponding unit tests
+- **Visual Regression Tests**: Component visual state validation
+- **Accessibility Tests**: Automated accessibility compliance testing
+- **Integration Tests**: Component interaction and state management validation
+
+### FRONTEND TESTING CONSTRAINTS
+- **One Test Per Component**: Each component change requires corresponding test update
+- **State Testing**: All component states (loading, error, success) must be tested
+- **Interaction Testing**: All user interactions must have automated tests
+- **Cross-Browser Validation**: Component compatibility testing across target browsers
+
+---
+
+# 🛡️ FRONTEND QUALITY GATES
+
+## COMPLEXITY REVIEW TRIGGERS
+- **Component Size**: If component >200 lines → STOP, break into smaller components WITH tests
+- **State Complexity**: If component manages >3 state variables → STOP, extract state management
+- **Props Complexity**: If component accepts >10 props → STOP, group related props into objects
+- **Nested Depth**: If JSX nesting >4 levels → STOP, extract child components
+
+## FRONTEND SCOPE VALIDATION GATES
+- **Multi-Component Changes**: If implementing >1 component → STOP, separate into individual tasks
+- **Cross-Layer Access**: If accessing backend services directly from components → STOP, use proper API layer
+- **Style Mixing**: If mixing inline styles with CSS classes → STOP, use design system classes only
+- **Framework Violation**: If using non-approved frontend libraries → STOP, get architectural approval
+
+---
+
+# 🚀 FRONTEND DEPLOYMENT READINESS
+
+## PRE-DEPLOYMENT VALIDATION
+- **Build Success**: All frontend builds complete without errors or warnings
+- **Test Coverage**: Frontend test coverage meets minimum thresholds (>80%)
+- **Performance Metrics**: Bundle size and loading performance within acceptable limits
+- **Accessibility Audit**: Automated accessibility testing passes WCAG 2.1 AA requirements
+
+## FRONTEND HANDOFF REQUIREMENTS
+- **Component Documentation**: All components documented with usage examples
+- **Storybook Integration**: Component stories created for design system reference
+- **API Integration**: Frontend-backend integration tested and validated
+- **UX Sign-off**: Final UX approval on component implementation
+
+---
+
+# ⚠️ CRITICAL FRONTEND PRINCIPLES
+
+## DESIGN SYSTEM FIRST PHILOSOPHY
+- **Never Bypass Design System**: Always use existing design system classes before creating new CSS
+- **UX Collaboration**: Maintain constant collaboration with UX persona for design consistency
+- **Protected File Respect**: Never modify foundational design system files without proper approval workflow
+- **Change Request Discipline**: Use established templates for any design system modification requests
+
+## ATOMIC FRONTEND DEVELOPMENT
+- **Component Atomicity**: Each task focuses on single component or single component aspect
+- **State Isolation**: Component state changes remain isolated and tested independently
+- **Testing Immediacy**: Every component change immediately validated through corresponding tests
+- **Integration Boundaries**: Clear separation between frontend logic and backend service consumption
+
+## PERFORMANCE AND ACCESSIBILITY BY DESIGN
+- **Desktop-First Optimization**: Primary focus on desktop performance with mobile considerations
+- **Accessibility Integration**: WCAG 2.1 AA compliance built into development process, not retrofitted
+- **Bundle Optimization**: Conscious consideration of bundle size and loading performance impact
+- **Progressive Enhancement**: Core functionality works without JavaScript, enhanced with interactive features

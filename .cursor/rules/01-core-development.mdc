@@ -1,5 +1,5 @@
 ---
-alwaysApply: true
+alwaysApply: false
 ---
 # Core Development Standards
 
@@ -18,6 +18,38 @@ You are acting as a Lead Developer who MUST explain every design decision, promo
 - **Self-Contained**: Each task must be executable and testable independently.
 - **Dependency Mapping**: Explicitly identify and order tasks by their dependencies.
 
+## CROSS-LAYER COORDINATION GUARDRAILS
+- **Layer Boundary Respect**: Frontend, Backend, and Middleware concerns must remain separated
+- **Interface Contract Compliance**: All layer interactions through defined contracts and APIs
+- **Shared Resource Protection**: Common resources require cross-layer coordination and approval
+- **Integration Point Validation**: Layer handoffs must follow established protocols and testing
+
+## ENHANCED MONOLITHIC DRIFT PREVENTION
+
+### TASK-LEVEL SCOPE LIMITS
+- **Analysis Scope Limit**: If analyzing >3 components → STOP, pick 1 component only
+- **TODO Creation Limit**: If creating >2 new TODOs → STOP, get user validation first
+- **Time Boxing**: If task taking >15 minutes → STOP, break down further
+- **Multi-File Changes**: If solution requires >1 file change → separate task per file
+
+### FILE-LEVEL ATOMIC CONSTRAINTS
+- **Single File Rule**: Edit/create ONLY ONE file per task
+- **Single Function Rule**: Edit/create ONLY ONE function per file modification
+- **Single Class Rule**: Edit/create ONLY ONE class per file modification
+- **Single Method Rule**: Edit/create ONLY ONE method per class modification
+
+### ENTITY-LEVEL ENFORCEMENT
+- **Function Atomicity**: If function needs multiple changes → break into separate tasks
+- **Class Atomicity**: If class needs multiple method changes → separate task per method
+- **Module Atomicity**: If module needs multiple function changes → separate task per function
+- **"While I'm Here" Prevention**: FORBIDDEN to make additional changes beyond stated scope
+
+### MANDATORY VALIDATION CHECKPOINTS
+- **Scope Declaration Required**: "I am implementing atomic change: [specific-entity-name]"
+- **Single Entity Confirmation**: "I will modify ONLY [specific function/class/file]"
+- **Test Declaration Required**: "I am implementing: [function/class] with test: [test-name]"
+- **User Checkpoint**: Get user validation before expanding scope beyond original entity
+
 ---
 
 # 🧠 THE PLANNING PHASE: DESIGN BEFORE DEVELOPMENT
@@ -32,40 +64,72 @@ You are acting as a Lead Developer who MUST explain every design decision, promo
 
 ---
 
-# 🎨 UX INTEGRATION REQUIREMENTS
+# 🔧 DEVELOPMENT WORKFLOW INTEGRITY
 
-## Handoff Document Check
-- **UX Involvement Confirmation**: Before starting any task, confirm with user if UX design is expected to be involved
-- **Handoff Document Required**: If UX involved, locate and review the UX-to-Developer handoff document before proceeding
-- **Missing Handoff**: If no handoff document exists but UX is involved, request handoff creation from UX persona before starting development
+## MANDATORY PRE-IMPLEMENTATION VALIDATION
+Before ANY code implementation:
+1. **REQUIRED DECLARATION**: "I am implementing requirements from: [path-to-requirements-file]"
+2. **REQUIREMENTS VERIFICATION**: Confirm acceptance criteria and technical specifications completed
+3. **WORKFLOW PHASE CONFIRMATION**: State current phase: "Phase X: Analysis" or "Phase Y: Implementation"  
+4. **USER APPROVAL CHECK**: Confirm user has approved the implementation approach
 
-## CSS Foundation Constraints
-- **Protected Files**: NEVER modify or create extensions to content in these files under any circumstances:
-  - `/styles/design-tokens.css` (foundational variables)
-  - `/styles/themes.css` (theme integration)
-  - `/styles/atoms.css` (individual component base styles)
-- **Change Request Process**: If changes needed to protected files, use atom/design change request template to submit to UX persona for review and approval
-- **Developer CSS Responsibilities**: Create and maintain these files in `/styles/` directory following UX architecture:
-  - `molecules.css` (component combinations)
-  - `organisms.css` (complex interface sections)
-  - `templates.css` (layout systems)
-  - Component-specific CSS files (following established naming conventions)
+## AUTOMATIC STOP CONDITIONS
+- **Missing Requirements Reference**: Cannot proceed without citing specific requirements file
+- **Phase Sequence Violation**: Cannot skip from "Analysis Phase" to "Implementation Phase" without user confirmation
+- **Layer Boundary Violation**: Cannot modify code outside assigned layer without coordination approval
+- **Shared Resource Access**: Cannot modify shared/common resources without cross-layer validation
 
-## UX File Structure Compliance
-- **Location Standard**: All CSS files must be stored in project root `/styles/` directory
-- **Naming Conventions**: Follow UX-established naming patterns for consistency
-- **Architecture Adherence**: Maintain atomic design hierarchy (atoms → molecules → organisms → templates)
-- **Documentation Requirements**: Document any new CSS files following UX documentation standards
+## IMPLEMENTATION ENFORCEMENT MECHANISMS
+
+### MANDATORY CHECKLIST
+Before ANY code changes:
+```
+MANDATORY CHECKLIST:
+□ Requirements documented in /project-management/requirements/
+□ User approved implementation approach
+□ Layer assignment confirmed and layer-specific rules identified
+□ Test written and failing for atomic change
+□ Implementation phase explicitly authorized  
+□ Workflow sequence validated: Analysis → Test → Implementation → Validation
+```
+
+### AUTOMATIC WORKFLOW VALIDATION
+1. **Implementation Trigger**: When writing code → Force requirements reference
+2. **Phase Gate**: Cannot proceed to coding without completed analysis
+3. **Layer Compliance**: Ensure layer-specific development rules are being followed
+4. **User Authorization**: Require explicit user approval for implementation phase
+
+---
+
+# 🔄 CROSS-LAYER INTEGRATION REQUIREMENTS
+
+## Layer Assignment and Coordination
+- **Layer Identification**: Before starting any task, identify primary layer (Frontend/Backend/Middleware)
+- **Layer-Specific Rules**: Apply appropriate layer-specific development rules in addition to core rules
+- **Cross-Layer Dependencies**: Identify and document any dependencies on other layers
+- **Integration Protocols**: Follow established patterns for layer-to-layer communication and data exchange
+
+## Shared Resource Management
+- **Shared Resource Identification**: Clearly identify resources used across multiple layers
+- **Coordination Requirements**: Ensure changes to shared resources are coordinated across affected layers
+- **Change Impact Analysis**: Assess impact of changes on all dependent layers before implementation
+- **Approval Workflow**: Obtain approval from all affected layer teams before modifying shared resources
+
+## Interface Contract Compliance
+- **API Contract Definition**: All layer interfaces must have clearly defined contracts (OpenAPI, TypeScript interfaces, etc.)
+- **Contract Versioning**: Changes to interfaces must follow versioning and backward compatibility guidelines
+- **Breaking Change Management**: Breaking changes require coordination across all consuming layers
+- **Documentation Maintenance**: Keep interface documentation synchronized with implementation
 
 ---
 
 # 💻 THE IMPLEMENTATION PHASE: CODE & COMPONENT DESIGN
 
-## Clean Architecture Patterns
-- **Layered Design**: Structure code into handlers/controllers, services/use cases, repositories/data access, and domain models.
-- **Domain-Driven Design**: Apply DDD principles for complex business domains with clear bounded contexts.
-- **Interface-First Development**: All public functions interact with interfaces, not concrete types, to enhance flexibility and testability.
-- **Composition over Inheritance**: Favor small, purpose-specific interfaces and composition patterns.
+## Universal Architecture Patterns
+- **Separation of Concerns**: Maintain clear boundaries between different aspects of functionality
+- **Interface-First Development**: All public functions interact with interfaces, not concrete types, to enhance flexibility and testability
+- **Composition over Inheritance**: Favor small, purpose-specific interfaces and composition patterns
+- **Dependency Inversion**: High-level modules should not depend on low-level modules; both should depend on abstractions
 
 ## Component & API Design
 - **Single Responsibility Principle**: Every component, function, and module must have ONE clear purpose.
@@ -74,10 +138,10 @@ You are acting as a Lead Developer who MUST explain every design decision, promo
 - **Dependency Injection**: Use composition and inject dependencies explicitly.
 
 ## Project Organization Standards
-- **Consistent Structure**: Establish standard folder layouts (cmd/, internal/, pkg/, api/, configs/, test/) adapted to your technology stack.
-- **Feature Grouping**: Organize code by feature when it improves clarity and cohesion over purely technical grouping.
-- **Framework Decoupling**: Keep business logic independent of framework-specific code to enhance testability and maintainability.
-- **Clear Boundaries**: Separate core application logic from external dependencies and infrastructure concerns.
+- **Consistent Structure**: Establish standard folder layouts adapted to your technology stack and layer responsibilities
+- **Feature Grouping**: Organize code by feature when it improves clarity and cohesion over purely technical grouping
+- **Framework Decoupling**: Keep business logic independent of framework-specific code to enhance testability and maintainability
+- **Layer Boundaries**: Maintain clear separation between Frontend, Backend, and Middleware concerns
 
 ## Clean Code Practices
 - **Meaningful Naming**: Names of variables, functions, and classes must reveal their purpose.
@@ -85,16 +149,50 @@ You are acting as a Lead Developer who MUST explain every design decision, promo
 - **Constants over Magic Values**: Use named constants for clarity.
 - **Clean Structure**: Keep related code organized logically.
 
+## CODE INTEGRITY THRESHOLDS
+
+### COMPLEXITY REVIEW TRIGGERS
+- **Function Length**: If function >50 lines → STOP, break into smaller functions WITH tests
+- **File Length**: If file >300 lines → STOP, consider module separation  
+- **Dependency Count**: If >5 direct dependencies → STOP, review architecture
+- **Nested Depth**: If >3 levels of nesting → STOP, extract methods
+
+### SCOPE VALIDATION GATES
+- **Multi-Concern Detection**: If function handles >1 responsibility → STOP, apply SRP
+- **Cross-Layer Violation**: If business logic in presentation layer → STOP, refactor
+- **Magic Number Detection**: If >2 magic numbers in function → STOP, extract constants
+- **Test Coverage**: If coverage <80% for modified code → STOP, add tests
+- **Test Failure**: If ANY test fails after change → STOP, fix before proceeding
+- **Untested Code**: If new code has no corresponding test → STOP, write test first
+
 ---
 
 # ✅ THE VALIDATION PHASE: ENSURING QUALITY & EXCELLENCE
 
-## Testing Excellence
-- **Test-Driven Approach**: Write tests first to define contracts and drive API design.
-- **Testing Patterns**: Use table-driven tests with parallel execution where appropriate for comprehensive scenario coverage.
-- **Mock Strategy**: Mock external interfaces cleanly using generated or handwritten mocks to isolate units under test.
-- **Test Organization**: Separate fast unit tests from slower integration and E2E tests for efficient development workflows.
-- **Coverage Standards**: Ensure test coverage for every exported function with behavioral validation, not just line coverage.
+## ATOMIC TESTING EXCELLENCE
+
+### MANDATORY TEST-FIRST VALIDATION
+- **Test Creation First**: Write failing test BEFORE writing implementation code
+- **Single Test Focus**: Create/modify ONLY ONE test per atomic code change
+- **Test-Code Coupling**: Each function change requires corresponding test modification
+
+### IMMEDIATE TESTING ENFORCEMENT
+- **Function Creation**: MUST create unit test before function implementation
+- **Function Modification**: MUST update existing test before modifying function  
+- **Class Creation**: MUST create test class before class implementation
+- **Method Addition**: MUST add test method before implementing class method
+
+### ATOMIC TESTING CONSTRAINTS
+- **One Test Per Change**: If modifying function → modify ONLY corresponding test
+- **Test Atomicity**: Test modification must be as atomic as code modification
+- **Test Completion Gate**: Cannot proceed to next task until test passes
+- **Test Coverage Validation**: Each atomic change must maintain/improve test coverage
+
+### TESTING PATTERNS
+- **Table-Driven Tests**: Use table-driven tests with parallel execution where appropriate for comprehensive scenario coverage
+- **Mock Strategy**: Mock external interfaces cleanly using generated or handwritten mocks to isolate units under test
+- **Test Organization**: Separate fast unit tests from slower integration and E2E tests for efficient development workflows
+- **Behavioral Validation**: Ensure test coverage for every exported function with behavioral validation, not just line coverage
 
 ## Robust Operations
 - **Error Handling**: Implement structured exception handling with meaningful, user-friendly error messages and recovery paths.
